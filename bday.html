@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday 💖</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: "Poppins", "Segoe UI", sans-serif;
+      color: white;
+      background:
+        radial-gradient(circle at 50% 20%, #703b73 0%, transparent 35%),
+        linear-gradient(135deg, #16001f, #35052f, #120018);
+    }
+
+    .screen {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* ---------- STARS ---------- */
+
+    .stars,
+    .stars::before,
+    .stars::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background-image:
+        radial-gradient(circle, white 1px, transparent 2px),
+        radial-gradient(circle, #ffd6f8 1px, transparent 2px),
+        radial-gradient(circle, #fff 1.5px, transparent 2.5px);
+      background-size: 90px 90px, 130px 130px, 180px 180px;
+      background-position: 10px 20px, 40px 80px, 100px 30px;
+      opacity: 0.55;
+      animation: twinkle 4s infinite alternate;
+    }
+
+    .stars::before {
+      opacity: 0.25;
+      transform: scale(1.3);
+      animation-delay: 1s;
+    }
+
+    .stars::after {
+      opacity: 0.2;
+      transform: scale(1.7);
+      animation-delay: 2s;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.2; }
+      to { opacity: 0.7; }
+    }
+
+    /* ---------- FLOATING HEARTS ---------- */
+
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      font-size: 20px;
+      opacity: 0;
+      animation: floatUp linear infinite;
+      filter: drop-shadow(0 0 8px #ff75c8);
+      pointer-events: none;
+    }
+
+    .heart:nth-child(1) { left: 8%; animation-duration: 9s; animation-delay: 1s; }
+    .heart:nth-child(2) { left: 23%; animation-duration: 12s; animation-delay: 4s; }
+    .heart:nth-child(3) { left: 45%; animation-duration: 10s; animation-delay: 2s; }
+    .heart:nth-child(4) { left: 68%; animation-duration: 13s; animation-delay: 5s; }
+    .heart:nth-child(5) { left: 85%; animation-duration: 9s; animation-delay: 3s; }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(.6) rotate(0);
+        opacity: 0;
+      }
+      15% { opacity: .8; }
+      100% {
+        transform: translateY(-110vh) scale(1.2) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- CONTENT ---------- */
+
+    .content {
+      position: relative;
+      z-index: 5;
+      width: min(92%, 520px);
+      text-align: center;
+    }
+
+    .step {
+      display: none;
+      animation: appear .9s ease forwards;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(25px) scale(.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    h1 {
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 18px;
+      text-shadow:
+        0 0 10px #ff80ce,
+        0 0 30px #ff4fb8;
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 6vw, 2.5rem);
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #ffe8f8;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .subtitle {
+      margin-bottom: 28px;
+    }
+
+    /* ---------- BUTTON ---------- */
+
+    button {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(135deg, #ff4fae, #b83dff);
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      box-shadow:
+        0 0 15px rgba(255, 79, 174, .5),
+        0 8px 25px rgba(0, 0, 0, .3);
+      transition: .3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 0 30px rgba(255, 79, 174, .8);
+    }
+
+    button:active {
+      transform: scale(.95);
+    }
+
+    /* ---------- CAKE ---------- */
+
+    .cake {
+      position: relative;
+      width: 190px;
+      height: 170px;
+      margin: 20px auto 30px;
+    }
+
+    .cake-body {
+      position: absolute;
+      bottom: 10px;
+      left: 15px;
+      width: 160px;
+      height: 90px;
+      border-radius: 12px 12px 20px 20px;
+      background: linear-gradient(#ff8fc9, #e94f9b);
+      box-shadow:
+        0 0 25px rgba(255, 94, 180, .45),
+        inset 0 -12px 0 rgba(180, 38, 110, .25);
+    }
+
+    .icing {
+      position: absolute;
+      top: -12px;
+      left: 0;
+      width: 160px;
+      height: 30px;
+      background: #fff0fa;
+      border-radius: 20px;
+      box-shadow: 0 3px 8px rgba(0,0,0,.15);
+    }
+
+    .icing::after {
+      content: "♡  ♡  ♡";
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 6px;
+      color: #ff65b8;
+      font-size: 12px;
+    }
+
+    .plate {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 190px;
+      height: 15px;
+      border-radius: 50%;
+      background: #fff0fa;
+      box-shadow: 0 0 15px #ff9bd4;
+    }
+
+    .candle {
+      position: absolute;
+      width: 12px;
+      height: 48px;
+      top: -58px;
+      border-radius: 5px;
+      background: repeating-linear-gradient(
+        45deg,
+        #fff 0 6px,
+        #ff69b4 6px 12px
+      );
+    }
+
+    .candle:nth-child(1) { left: 45px; }
+    .candle:nth-child(2) { left: 74px; }
+    .candle:nth-child(3) { left: 103px; }
+    .candle:nth-child(4) { left: 132px; }
+
+    .flame {
+      position: absolute;
+      width: 13px;
+      height: 19px;
+      top: -23px;
+      left: 0;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      background: #ffd166;
+      box-shadow:
+        0 0 8px #ffd166,
+        0 0 20px #ff9f1c;
+      animation: flame .5s infinite alternate;
+    }
+
+    @keyframes flame {
+      from { transform: rotate(-45deg) scale(.9); }
+      to { transform: rotate(-40deg) scale(1.1); }
+    }
+
+    /* ---------- FINAL MESSAGE ---------- */
+
+    .final-message {
+      padding: 28px 22px;
+      border-radius: 25px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      backdrop-filter: blur(12px);
+      box-shadow:
+        0 0 35px rgba(255, 92, 190, .18),
+        inset 0 0 25px rgba(255,255,255,.03);
+    }
+
+    .big-heart {
+      font-size: 60px;
+      display: block;
+      margin-bottom: 12px;
+      animation: heartbeat 1.4s infinite;
+      filter: drop-shadow(0 0 15px #ff4fae);
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.18); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.12); }
+    }
+
+    .signature {
+      margin-top: 20px;
+      color: #ffb8df;
+      font-style: italic;
+    }
+
+    .hint {
+      margin-top: 18px;
+      font-size: .78rem;
+      color: #cfa8c5;
+    }
+
+    @media (max-width: 420px) {
+      .content {
+        width: 90%;
+      }
+
+      p {
+        font-size: .94rem;
+      }
+
+      .final-message {
+        padding: 23px 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="screen">
+
+    <div class="stars"></div>
+
+    <!-- Floating hearts -->
+    <div class="heart">💗</div>
+    <div class="heart">💕</div>
+    <div class="heart">💖</div>
+    <div class="heart">💗</div>
+    <div class="heart">💞</div>
+
+    <main class="content">
+
+      <!-- STEP 1 -->
+      <section class="step active" id="step1">
+        <h1>Hey You! 💕</h1>
+        <p class="subtitle">
+          I have a tiny little surprise waiting for you...
+          <br>
+          But you have to promise to smile first. ✨
+        </p>
+
+        <button onclick="nextStep()">
+          I'm Ready 💗
+        </button>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step" id="step2">
+        <h2>Wait... 🎀</h2>
+        <p class="subtitle">
+          Before we continue...
+          <br>
+          close your eyes for a second
+          and make a little birthday wish. ✨
+        </p>
+
+        <button onclick="nextStep()">
+          Wish Made ✨
+        </button>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step" id="step3">
+
+        <div class="cake">
+
+          <div class="cake-body">
+            <div class="icing"></div>
+          </div>
+
+          <div class="candle">
+            <div class="flame"></div>
+          </div>
+
+          <div class="candle">
+            <div class="flame"></div>
+          </div>
+
+          <div class="candle">
+            <div class="flame"></div>
+          </div>
+
+          <div class="candle">
+            <div class="flame"></div>
+          </div>
+
+          <div class="plate"></div>
+        </div>
+
+        <h2>Make a Wish! 🕯️</h2>
+
+        <p class="subtitle">
+          May every little dream in your heart
+          find its way to you. 💫
+        </p>
+
+        <button onclick="nextStep()">
+          Blow the Candles 🕯️
+        </button>
+
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="step" id="step4">
+
+        <div class="final-message">
+
+          <span class="big-heart">❤️</span>
+
+          <h1>Happy Birthday!</h1>
+
+          <p>
+            Today isn't just another day...
+            it's the day the world became a little brighter
+            because <b>you</b> came into it. ✨
+          </p>
+
+          <br>
+
+          <p>
+            I hope your days are filled with laughter,
+            your heart with peace,
+            and your life with beautiful moments
+            that you'll remember forever. 🌸
+          </p>
+
+          <br>
+
+          <p>
+            Thank you for being such a wonderful person
+            and for bringing a little more happiness
+            wherever you go.
+          </p>
+
+          <p class="signature">
+            Stay happy. Stay amazing. 💕
+            <br>
+            And never stop smiling. ✨
+          </p>
+
+        </div>
+
+        <p class="hint">
+          Made with a little love just for you 💗
+        </p>
+
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    let currentStep = 1;
+
+    function nextStep() {
+      const current = document.getElementById("step" + currentStep);
+
+      current.classList.remove("active");
+
+      currentStep++;
+
+      const next = document.getElementById("step" + currentStep);
+
+      if (next) {
+        next.classList.add("active");
+      }
+    }
+  </script>
+
+</body>
+</html>
